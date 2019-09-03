@@ -1,0 +1,35 @@
+
+<?php  
+use google\appengine\api\cloud_storage\CloudStorageTools;  
+$bucket = 'hello-247805.appspot.com';
+$root_path = 'gs://' . $bucket . '/';  
+$_url = '';  
+
+if(isset($_POST['submit']))  
+{  
+    if(isset($_FILES['userfile']))  
+    {  
+        $name = $_FILES['userfile']['name'];  
+        $file_size =$_FILES['userfile']['size'];  
+        $file_tmp =$_FILES['userfile']['tmp_name'];  
+        $original = $root_path .$name;  
+        move_uploaded_file($file_tmp, $original);  
+        $_url=CloudStorageTools::getImageServingUrl($original);  
+       } 
+    }  
+} 
+ 
+  
+?>  
+    <html>  
+    <head><title>Candidate details</title></head>
+    <body>  
+    <h1>Enter candidate details</h1>
+        <form action="#" method="post" enctype="multipart/form-data"> Send these files:  
+            <p/> <input name="userfile" type="file" />  
+            <p/> <input type="submit" name="submit" value="Send files" /> </form>  
+    </body>  
+  
+
+main.php
+Displaying main.php.
